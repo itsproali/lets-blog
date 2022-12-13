@@ -27,4 +27,4 @@
 
 <br>
 
-### Author: [Mohammad Ali]("https://itsproali.netlify.app/")
+### Author: [Mohammad Ali](https://itsproali.netlify.app)
