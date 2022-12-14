@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import loadBlogsAction from "../redux/actions/loadBlogsAction";
 import {
   setSort,
   sortFirstUpload,
   sortLastUpload,
   sortMostViewed,
 } from "../redux/actions/sortAction";
-import BlogCart from "./BlogCart";
+import BlogCart from "./BlogCard";
 import Loading from "./Loading/Loading";
 
 const Blogs = () => {
-  const { blogs, loading, sort } = useSelector((state) => state.blog);
+  const { blogs, loading, sort, filter } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,10 +29,12 @@ const Blogs = () => {
   }
   return (
     <div className="container mx-auto">
-      <div className="flex items-center justify-between my-4">
-        <h3 className="text-3xl font-semibold text-primary">Trending Blogs</h3>
+      <div className="flex items-center flex-wrap justify-between my-4">
+        <h3 className="text-2xl sm:text-3xl font-semibold text-primary">
+          {filter ? `Search result for: ${filter}` : "Trending Blogs"}
+        </h3>
         <label htmlFor="sort" className="flex items-center gap-2">
-          <span className="font-semibold text-secondary text-xl">
+          <span className="font-semibold text-secondary sm:text-xl">
             Sort By:{" "}
           </span>
           <select
@@ -53,6 +56,16 @@ const Blogs = () => {
           <BlogCart blog={blog} key={blog._id} />
         ))}
       </div>
+      {filter && (
+        <div className="mb-6 mr-2 flex justify-end">
+          <button
+            className="text-xl text-primary font-semibold"
+            onClick={() => dispatch(loadBlogsAction())}
+          >
+            See All
+          </button>
+        </div>
+      )}
     </div>
   );
 };

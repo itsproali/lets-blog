@@ -1,5 +1,6 @@
 import {
   ADD_TO_HISTORY,
+  FILTER_BLOG,
   GET_BLOGS,
   GET_BLOG_DETAILS,
   SET_SORT,
@@ -15,6 +16,7 @@ const initialState = {
   current_blog: null,
   reading_history: [],
   sort: "first",
+  filter: null,
 };
 
 const blogReducer = (state = initialState, action) => {
@@ -31,6 +33,7 @@ const blogReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         blogs: action.payload,
+        filter: null,
       };
     // Get a specific blog details
     case GET_BLOG_DETAILS:
@@ -79,6 +82,18 @@ const blogReducer = (state = initialState, action) => {
       return {
         ...state,
         blogs: sorted,
+      };
+    // Filter Blogs
+    case FILTER_BLOG:
+      const filtered = state.blogs.filter(
+        (item) =>
+          item.title.includes(action.payload) ||
+          item.tags.includes(action.payload)
+      );
+      return {
+        ...state,
+        filter: action.payload,
+        blogs: filtered,
       };
     default:
       return state;

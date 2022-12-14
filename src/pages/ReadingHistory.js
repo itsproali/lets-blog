@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import BlogCart from "../components/BlogCart";
+import BlogCard from "../components/BlogCard";
 
 const ReadingHistory = () => {
   const { reading_history } = useSelector((state) => state.blog);
@@ -12,7 +12,7 @@ const ReadingHistory = () => {
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 py-4">
         {reading_history.map((blog) => (
-          <BlogCart blog={blog} key={blog._id} />
+          <BlogCard blog={blog} key={blog._id} />
         ))}
       </div>
     </div>

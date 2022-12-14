@@ -8,3 +8,6 @@ export const SET_SORT = "SET_SORT";
 export const SORT_LAST_UPLOAD = "SORT_LAST_UPLOAD";
 export const SORT_FIRST_UPLOAD = "SORT_FIRST_UPLOAD";
 export const SORT_MOST_VIEWED = "SORT_MOST_VIEWED";
+
+// Filtering
+export const FILTER_BLOG = "FILTER_BLOG";

@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import getBlogDetails from "../redux/actions/getBlogDetails";
 import Loading from "../components/Loading/Loading";
 import addToHistoryAction from "../redux/actions/addToHistoryAction";
+import filterBlogAction from "../redux/actions/filterBlogAction";
 
 /**
  * _id
@@ -21,6 +22,7 @@ const BlogDetails = () => {
   const { id } = useParams();
   const { current_blog, loading } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     if (id) {
       dispatch(getBlogDetails(id));
@@ -32,6 +34,12 @@ const BlogDetails = () => {
       dispatch(addToHistoryAction(current_blog));
     }
   }, [dispatch, current_blog]);
+
+  // Handle Filter
+  const handleFilter = (tag) => {
+    dispatch(filterBlogAction(tag));
+    navigate("/");
+  };
 
   if (loading) {
     return <Loading />;
@@ -73,6 +81,7 @@ const BlogDetails = () => {
                 <button
                   key={tag}
                   className="rounded bg-white px-4 py-1 text-black shadow"
+                  onClick={() => handleFilter(tag)}
                 >
                   {tag}
                 </button>
