@@ -1,0 +1,25 @@
+.blog_table {
+    /* display: table; */
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid lightgray;
+    box-shadow: 2px 2px 10px lightgray;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.blog_table tr {
+    border-bottom: 1px solid lightgray;
+}
+
+.blog_table th {
+    padding: 10px 0;
+    text-align: center;
+    background-color: rgba(211, 211, 211, 0.5);
+}
+
+.blog_table td {
+    padding: 15px 0;
+    text-align: center;
+
+}

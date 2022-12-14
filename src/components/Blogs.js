@@ -1,10 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSort,
+  sortFirstUpload,
+  sortLastUpload,
+  sortMostViewed,
+} from "../redux/actions/sortAction";
 import BlogCart from "./BlogCart";
 import Loading from "./Loading/Loading";
 
 const Blogs = () => {
-  const { blogs, loading } = useSelector((state) => state.blog);
+  const { blogs, loading, sort } = useSelector((state) => state.blog);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (sort === "last") {
+      dispatch(sortLastUpload());
+    } else if (sort === "popular") {
+      dispatch(sortMostViewed());
+    } else {
+      dispatch(sortFirstUpload());
+    }
+  }, [dispatch, sort]);
 
   if (loading) {
     return <Loading />;
@@ -21,15 +38,17 @@ const Blogs = () => {
             name="sort"
             id="sort"
             className="focus:outline-none py-1 px-3 bg-white rounded"
-            // onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => dispatch(setSort(e.target.value))}
+            value={sort}
           >
-            <option value="Last Upload">Last Upload</option>
-            <option value="First Upload">First Upload</option>
+            <option value="first">First Upload</option>
+            <option value="last">Last Upload</option>
+            <option value="popular">Most Viewed</option>
           </select>
         </label>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-4">
         {blogs.map((blog) => (
           <BlogCart blog={blog} key={blog._id} />
         ))}

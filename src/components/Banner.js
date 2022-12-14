@@ -4,8 +4,8 @@ const Banner = () => {
   return (
     <div className="h-[50vh] w-full flex flex-col items-center justify-center gap-10">
       <h2 className="text-3xl sm:text-5xl font-semibold max-w-2xl text-center">
-        Share your stories, experiences by{" "}
-        <span className="text-primary font-bold">Blogs</span>
+        Let's <span className="text-primary font-bold">Blog</span> your stories
+        and experiences
       </h2>
 
       <div className="flex items-center">

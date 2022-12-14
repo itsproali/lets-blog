@@ -14,8 +14,9 @@ const Navbar = () => {
   return (
     <div className="w-full border-b bg-white relative">
       <nav className="container mx-auto flex items-center justify-between">
-        <Link to="/">
-          <h2 className="text-2xl text-primary font-bold">Let's Blog</h2>
+        <Link to="/" className="flex items-center gap-1">
+          <h2 className="text-2xl text-primary font-bold">Let's</h2>
+          <img src="/blog.png" alt="blog" width={30} />
         </Link>
 
         <div className="hidden md:flex items-center font-semibold">
