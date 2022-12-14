@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import getBlogDetails from "../redux/actions/getBlogDetails";
 import Loading from "../components/Loading/Loading";
+import addToHistoryAction from "../redux/actions/addToHistoryAction";
 
 /**
  * _id
@@ -18,6 +19,7 @@ import Loading from "../components/Loading/Loading";
 
 const BlogDetails = () => {
   const { id } = useParams();
+  const { current_blog, loading } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
   useEffect(() => {
     if (id) {
@@ -25,7 +27,11 @@ const BlogDetails = () => {
     }
   }, [dispatch, id]);
 
-  const { current_blog, loading } = useSelector((state) => state.blog);
+  useEffect(() => {
+    if (current_blog) {
+      dispatch(addToHistoryAction(current_blog));
+    }
+  }, [dispatch, current_blog]);
 
   if (loading) {
     return <Loading />;
@@ -34,7 +40,7 @@ const BlogDetails = () => {
   if (!current_blog) {
     return <p>No Blog Found</p>;
   }
-  
+
   const { title, img, description, tags, author, blog_no, views } =
     current_blog;
 

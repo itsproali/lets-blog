@@ -1,4 +1,5 @@
 import {
+  ADD_TO_HISTORY,
   GET_BLOGS,
   GET_BLOG_DETAILS,
   START_LOADING,
@@ -13,6 +14,11 @@ const initialState = {
 
 const blogReducer = (state = initialState, action) => {
   switch (action.type) {
+    case START_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case GET_BLOGS:
       return {
         ...state,
@@ -25,13 +31,19 @@ const blogReducer = (state = initialState, action) => {
         loading: false,
         current_blog: action.payload,
       };
-
-    case START_LOADING:
+    case ADD_TO_HISTORY:
+      const exist = state.reading_history.find(
+        (blog) => blog._id === action.payload._id
+      );
+      if (exist) {
+        return {
+          ...state,
+        };
+      }
       return {
         ...state,
-        loading: true,
+        reading_history: [...state.reading_history, action.payload],
       };
-
     default:
       return state;
   }
