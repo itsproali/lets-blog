@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BlogCart = ({ blog }) => {
+const BlogCard = ({ blog }) => {
   return (
     <Link
       // key={blog._id}
@@ -21,4 +21,4 @@ const BlogCart = ({ blog }) => {
   );
 };
 
-export default BlogCart;
+export default BlogCard;

@@ -17,6 +17,7 @@ const initialState = {
   reading_history: [],
   sort: "first",
   filter: null,
+  filtered: [],
 };
 
 const blogReducer = (state = initialState, action) => {
@@ -34,6 +35,7 @@ const blogReducer = (state = initialState, action) => {
         loading: false,
         blogs: action.payload,
         filter: null,
+        filtered: [],
       };
     // Get a specific blog details
     case GET_BLOG_DETAILS:
@@ -87,13 +89,13 @@ const blogReducer = (state = initialState, action) => {
     case FILTER_BLOG:
       const filtered = state.blogs.filter(
         (item) =>
-          item.title.includes(action.payload) ||
+          item.title.toLowerCase().includes(action.payload.toLowerCase()) ||
           item.tags.includes(action.payload)
       );
       return {
         ...state,
         filter: action.payload,
-        blogs: filtered,
+        filtered: filtered,
       };
     default:
       return state;

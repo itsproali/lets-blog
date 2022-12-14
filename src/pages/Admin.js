@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
 import loadBlogsAction from "../redux/actions/loadBlogsAction";
 import "../Styles/styles.css";
+import { Link } from "react-router-dom";
 
 const Admin = () => {
   const { blogs, loading } = useSelector((state) => state.blog);
@@ -26,10 +27,12 @@ const Admin = () => {
 
       <div className="container mx-auto mb-8 p-6 bg-white rounded-lg">
         <div className="flex justify-end">
-          <button className="ml-auto flex items-center gap-1 text-white bg-primary rounded py-2 px-6 font-semibold hover:bg-secondary duration-300 active:scale-95">
-            <HiPlus />
-            <span>ADD NEW</span>
-          </button>
+          <Link to="/add-new">
+            <button className="ml-auto flex items-center gap-1 text-white bg-primary rounded py-2 px-6 font-semibold hover:bg-secondary duration-300 active:scale-95">
+              <HiPlus />
+              <span>ADD NEW</span>
+            </button>
+          </Link>
         </div>
 
         <div className="mt-4">

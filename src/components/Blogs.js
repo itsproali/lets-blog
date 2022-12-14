@@ -7,11 +7,13 @@ import {
   sortLastUpload,
   sortMostViewed,
 } from "../redux/actions/sortAction";
-import BlogCart from "./BlogCard";
+import BlogCard from "./BlogCard";
 import Loading from "./Loading/Loading";
 
 const Blogs = () => {
-  const { blogs, loading, sort, filter } = useSelector((state) => state.blog);
+  const { blogs, loading, sort, filter, filtered } = useSelector(
+    (state) => state.blog
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,9 +54,9 @@ const Blogs = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-4">
-        {blogs.map((blog) => (
-          <BlogCart blog={blog} key={blog._id} />
-        ))}
+        {filter
+          ? filtered.map((blog) => <BlogCard blog={blog} key={blog._id} />)
+          : blogs.map((blog) => <BlogCard blog={blog} key={blog._id} />)}
       </div>
       {filter && (
         <div className="mb-6 mr-2 flex justify-end">
