@@ -5,14 +5,21 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/Loading/Loading";
 import loadBlogsAction from "../redux/actions/loadBlogsAction";
 import "../Styles/styles.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  deleteBlogAction,
+  setCurrentBlog,
+} from "../redux/actions/updateBlogAction";
 
 const Admin = () => {
   const { blogs, loading } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(loadBlogsAction());
+    if (blogs.length === 0) {
+      dispatch(loadBlogsAction());
+    }
   }, [4]);
 
   if (loading) {
@@ -66,12 +73,17 @@ const Admin = () => {
                       <button
                         className="w-10 h-10 rounded-full text-success bg-gray-200 bg-opacity-40 grid place-items-center hover:bg-green-200"
                         title="Edit Blog"
+                        onClick={() => {
+                          dispatch(setCurrentBlog(blog));
+                          navigate(`/update-blog/${blog._id}`);
+                        }}
                       >
                         <BiEdit size={25} />
                       </button>
                       <button
                         className="w-10 h-10 rounded-full text-error bg-gray-200 bg-opacity-40 grid place-items-center hover:bg-red-200"
                         title="Delete Blog"
+                        onClick={() => dispatch(deleteBlogAction(blog._id))}
                       >
                         <BiTrash size={25} />
                       </button>

@@ -9,6 +9,9 @@ import {
   SORT_LAST_UPLOAD,
   SORT_MOST_VIEWED,
   START_LOADING,
+  SET_CURRENT_BLOG,
+  UPDATE_BLOG,
+  DELETE_BLOG,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
@@ -37,6 +40,7 @@ const blogReducer = (state = initialState, action) => {
         blogs: action.payload,
         filter: null,
         filtered: [],
+        current_blog: null,
       };
     // Get a specific blog details
     case GET_BLOG_DETAILS:
@@ -107,6 +111,32 @@ const blogReducer = (state = initialState, action) => {
           { _id: action.payload._id, ...action.payload.blog },
         ],
       };
+    // Set Current blog for getting blog data
+    case SET_CURRENT_BLOG:
+      return {
+        ...state,
+        current_blog: action.payload,
+      };
+    // Update a Blog
+    case UPDATE_BLOG:
+      const updatedBlog = state.blogs;
+      const index = state.blogs.findIndex(
+        (blog) => blog._id === action.payload._id
+      );
+      updatedBlog[index] = action.payload;
+
+      return {
+        ...state,
+        blogs: updatedBlog,
+      };
+      // Delete a Blog
+      case DELETE_BLOG:
+        const newBlogs = state.blogs.filter(blog => blog._id !== action.payload)
+        return {
+          ...state,
+          loading: false,
+          blogs: newBlogs
+        }
     default:
       return state;
   }

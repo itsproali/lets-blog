@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import addBlogAction from "../redux/actions/addBlogAction";
+import { updateBlogAction } from "../redux/actions/updateBlogAction";
 
 const BlogForm = ({ type }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { current_blog } = useSelector((state) => state.blog);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,12 +18,23 @@ const BlogForm = ({ type }) => {
     const inputtedTags = e.target.tags.value;
 
     let allTags = inputtedTags.split(",");
-    const tags = allTags.map(elem => elem.trim())
+    const tags = allTags.map((elem) => elem.trim());
     const views = 0;
     const blog = { title, img, author, tags, description, views };
-    
+
     if (type === "add-new") {
       dispatch(addBlogAction(blog));
+    }
+
+    if (type === "update") {
+      dispatch(
+        updateBlogAction({
+          _id: current_blog._id,
+          ...blog,
+          views: current_blog.views,
+          blog_no: current_blog.blog_no,
+        })
+      );
     }
     setTimeout(() => {
       navigate("/admin");
@@ -44,6 +57,7 @@ const BlogForm = ({ type }) => {
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
             placeholder="Enter a Blog title"
             required
+            defaultValue={current_blog.title}
           />
         </label>
         <label htmlFor="img">
@@ -57,6 +71,7 @@ const BlogForm = ({ type }) => {
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
             placeholder="https://img.png"
             required
+            defaultValue={current_blog.img}
           />
         </label>
 
@@ -71,6 +86,7 @@ const BlogForm = ({ type }) => {
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
             placeholder="Enter your name"
             required
+            defaultValue={current_blog.author}
           />
         </label>
         <label htmlFor="tags">
@@ -84,6 +100,7 @@ const BlogForm = ({ type }) => {
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
             placeholder="persona, tutorial, science"
             required
+            defaultValue={current_blog.tags.map((tag) => tag)}
           />
         </label>
 
@@ -98,6 +115,7 @@ const BlogForm = ({ type }) => {
             rows="6"
             placeholder="Describe about the blog..!"
             required
+            defaultValue={current_blog.description}
           ></textarea>
         </label>
       </div>
