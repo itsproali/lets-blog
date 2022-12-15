@@ -28,7 +28,7 @@ const Banner = () => {
         />
         <label htmlFor="submit">
           <input id="submit" name="submit" type="submit" value="" />
-          <button className="py-2 px-3 sm:px-6 bg-primary text-white font-medium -ml-20 sm:-ml-24 rounded-lg">
+          <button className="py-2 px-3 sm:px-6 bg-primary text-white font-medium -ml-20 sm:ml-[-6.5rem] rounded-lg">
             Search
           </button>
         </label>

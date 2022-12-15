@@ -47,7 +47,7 @@ const blogReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        current_blog: action.payload,
+        current_blog: state.blogs.find(blog => blog._id === action.payload),
       };
     // Add blog to reading history
     case ADD_TO_HISTORY:

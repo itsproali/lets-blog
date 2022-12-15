@@ -57,7 +57,7 @@ const BlogForm = ({ type }) => {
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
             placeholder="Enter a Blog title"
             required
-            defaultValue={current_blog.title}
+            defaultValue={current_blog?.title}
           />
         </label>
         <label htmlFor="img">
@@ -71,7 +71,7 @@ const BlogForm = ({ type }) => {
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
             placeholder="https://img.png"
             required
-            defaultValue={current_blog.img}
+            defaultValue={current_blog?.img}
           />
         </label>
 
@@ -86,7 +86,7 @@ const BlogForm = ({ type }) => {
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
             placeholder="Enter your name"
             required
-            defaultValue={current_blog.author}
+            defaultValue={current_blog?.author}
           />
         </label>
         <label htmlFor="tags">
@@ -98,9 +98,9 @@ const BlogForm = ({ type }) => {
             name="tags"
             id="tags"
             className="block w-full mt-1 py-2 px-3 rounded border focus:border-primary outline-none"
-            placeholder="persona, tutorial, science"
+            placeholder="programming, nature, science"
             required
-            defaultValue={current_blog.tags.map((tag) => tag)}
+            defaultValue={current_blog?.tags.map((tag) => tag)}
           />
         </label>
 
@@ -115,7 +115,7 @@ const BlogForm = ({ type }) => {
             rows="6"
             placeholder="Describe about the blog..!"
             required
-            defaultValue={current_blog.description}
+            defaultValue={current_blog?.description}
           ></textarea>
         </label>
       </div>

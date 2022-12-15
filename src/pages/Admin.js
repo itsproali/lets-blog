@@ -22,6 +22,13 @@ const Admin = () => {
     }
   }, [4]);
 
+const handleDelete = (blogId) => {
+  const isConfirm = window.confirm("Are you sure you want to delete this blog..?");
+  if(isConfirm) {
+    dispatch(deleteBlogAction(blogId))
+  }
+}
+
   if (loading) {
     return <Loading />;
   }
@@ -83,7 +90,7 @@ const Admin = () => {
                       <button
                         className="w-10 h-10 rounded-full text-error bg-gray-200 bg-opacity-40 grid place-items-center hover:bg-red-200"
                         title="Delete Blog"
-                        onClick={() => dispatch(deleteBlogAction(blog._id))}
+                        onClick={() => handleDelete(blog._id)}
                       >
                         <BiTrash size={25} />
                       </button>

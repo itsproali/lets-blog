@@ -53,7 +53,7 @@ const Blogs = () => {
         </label>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 my-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-6 my-8">
         {filter
           ? filtered.map((blog) => <BlogCard blog={blog} key={blog._id} />)
           : blogs.map((blog) => <BlogCard blog={blog} key={blog._id} />)}

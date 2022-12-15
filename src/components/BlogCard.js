@@ -6,7 +6,7 @@ const BlogCard = ({ blog }) => {
     <Link
       // key={blog._id}
       to={`/blog/${blog._id}`}
-      className="rounded-lg bg-white shadow-lg flex flex-col justify-between h-[500px]"
+      className="rounded-lg bg-white shadow-lg flex flex-col justify-between h-[500px] hover:scale-105 duration-300 hover:shadow-primary"
     >
       <img
         src={blog.img}
