@@ -6,7 +6,9 @@ const getBlogDetails = (blogId) => {
     dispatch({ type: START_LOADING });
 
     // Fetch Blog Data
-    const { data } = await axios.get(`http://localhost:5000/blog/${blogId}`);
+    const { data } = await axios.get(
+      `https://lets-blog-server.vercel.app/blog/${blogId}`
+    );
     if (data.success) {
       dispatch({ type: GET_BLOG_DETAILS, payload: data.data });
     }

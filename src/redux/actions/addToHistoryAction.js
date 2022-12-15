@@ -4,7 +4,7 @@ import axios from "axios";
 const addToHistoryAction = (blog) => {
   return async (dispatch) => {
     const { data } = await axios.patch(
-      "http://localhost:5000/views-increment",
+      "https://lets-blog-server.vercel.app/views-increment",
       { _id: blog._id, views: blog.views + 1 }
     );
     console.log(data);
