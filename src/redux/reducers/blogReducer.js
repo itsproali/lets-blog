@@ -1,4 +1,5 @@
 import {
+  ADD_NEW_BLOG,
   ADD_TO_HISTORY,
   FILTER_BLOG,
   GET_BLOGS,
@@ -96,6 +97,15 @@ const blogReducer = (state = initialState, action) => {
         ...state,
         filter: action.payload,
         filtered: filtered,
+      };
+    // Add New Blog
+    case ADD_NEW_BLOG:
+      return {
+        ...state,
+        blogs: [
+          ...state.blogs,
+          { _id: action.payload._id, ...action.payload.blog },
+        ],
       };
     default:
       return state;

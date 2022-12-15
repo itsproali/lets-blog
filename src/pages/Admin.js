@@ -25,7 +25,7 @@ const Admin = () => {
         Everything in your <span className="text-primary">Control</span>
       </h1>
 
-      <div className="container mx-auto mb-8 p-6 bg-white rounded-lg">
+      <div className="container mx-auto mb-8 p-6 bg-white rounded-lg min-w-[750px] overflow-x-auto">
         <div className="flex justify-end">
           <Link to="/add-new">
             <button className="ml-auto flex items-center gap-1 text-white bg-primary rounded py-2 px-6 font-semibold hover:bg-secondary duration-300 active:scale-95">
